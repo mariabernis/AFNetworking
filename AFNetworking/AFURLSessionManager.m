@@ -424,7 +424,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 
     AFURLSessionManagerTaskDelegate *delegate = nil;
     [self.lock lock];
-    delegate = self.mutableTaskDelegatesKeyedByTaskIdentifier[@(task.taskIdentifier)];
+    delegate = self.mutableTaskDelegatesKeyedByTaskIdentifier[@((NSUInteger)task)];
     [self.lock unlock];
 
     return delegate;
@@ -437,7 +437,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
     NSParameterAssert(delegate);
 
     [self.lock lock];
-    self.mutableTaskDelegatesKeyedByTaskIdentifier[@(task.taskIdentifier)] = delegate;
+    self.mutableTaskDelegatesKeyedByTaskIdentifier[@((NSUInteger)task)] = delegate;
     [self.lock unlock];
 }
 
@@ -513,7 +513,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
     NSParameterAssert(task);
 
     [self.lock lock];
-    [self.mutableTaskDelegatesKeyedByTaskIdentifier removeObjectForKey:@(task.taskIdentifier)];
+    [self.mutableTaskDelegatesKeyedByTaskIdentifier removeObjectForKey:@((NSUInteger)task)];
     [self.lock unlock];
 }
 

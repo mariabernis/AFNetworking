@@ -263,7 +263,6 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
                     [strongSelf setBackgroundImage:responseObject forState:state];
                 }
             }
-            [[[strongSelf class] sharedImageCache] cacheImage:responseObject forRequest:urlRequest];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             if ([[urlRequest URL] isEqual:[operation.response URL]]) {
                 if (failure) {

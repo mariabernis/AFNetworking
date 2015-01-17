@@ -424,7 +424,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 
     AFURLSessionManagerTaskDelegate *delegate = nil;
     [self.lock lock];
-    delegate = self.mutableTaskDelegatesKeyedByTaskIdentifier[@((NSUInteger)task)];
+    delegate = self.mutableTaskDelegatesKeyedByTaskIdentifier[@(task.taskIdentifier)];
     [self.lock unlock];
 
     return delegate;
@@ -437,7 +437,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
     NSParameterAssert(delegate);
 
     [self.lock lock];
-    self.mutableTaskDelegatesKeyedByTaskIdentifier[@((NSUInteger)task)] = delegate;
+    self.mutableTaskDelegatesKeyedByTaskIdentifier[@(task.taskIdentifier)] = delegate;
     [self.lock unlock];
 }
 
@@ -467,12 +467,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
         }
     }
 
-    if (delegate.progress) {
-        delegate.progress.totalUnitCount = totalUnitCount;
-    } else {
-        delegate.progress = [NSProgress progressWithTotalUnitCount:totalUnitCount];
-    }
-
+    delegate.progress = [NSProgress progressWithTotalUnitCount:totalUnitCount];
     delegate.progress.pausingHandler = ^{
         [uploadTask suspend];
     };
@@ -513,7 +508,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
     NSParameterAssert(task);
 
     [self.lock lock];
-    [self.mutableTaskDelegatesKeyedByTaskIdentifier removeObjectForKey:@((NSUInteger)task)];
+    [self.mutableTaskDelegatesKeyedByTaskIdentifier removeObjectForKey:@(task.taskIdentifier)];
     [self.lock unlock];
 }
 

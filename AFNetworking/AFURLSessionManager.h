@@ -183,7 +183,7 @@
 
  @return A manager for a newly-created session.
  */
-- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration;
 
 /**
  Invalidates the managed session, optionally canceling pending tasks.
